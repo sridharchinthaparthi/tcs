@@ -272,13 +272,11 @@ class App {
                 const fileName = fileMap[category] || category;
 
 
-                const response = await fetch(`/data/${fileName}.json`);
+                const response = await fetch(`data/${fileName}.json`);
                 if (!response.ok) throw new Error("Data not found");
 
                 const obscuredText = await response.text();
-                // Reverse string back
                 const base64Str = obscuredText.split('').reverse().join('');
-                // Decode base64 handling UTF-8 characters safely
                 const jsonStr = decodeURIComponent(escape(atob(base64Str)));
 
                 const data = JSON.parse(jsonStr);
